@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { Sparkles, Zap, Brain, Code, Database, Globe, Video, Calendar, Mail, Layers, ArrowRight, CheckCircle, Menu, X, BookTemplate } from 'lucide-react';
 import { AgentBuilder } from './pages/AgentBuilder';
 import { Dashboard } from './pages/Dashboard';
@@ -78,8 +79,8 @@ const App = () => {
   if (currentPage === 'nl-creator') {
     return (
       <>
-        <NLAgentCreator 
-          onBack={() => setCurrentPage('dashboard')} 
+        <NLAgentCreator
+          onBack={() => setCurrentPage('dashboard')}
           onAgentCreated={handleNLAgentCreated}
         />
         <GuideBot />
@@ -101,10 +102,10 @@ const App = () => {
   if (currentPage === 'dashboard') {
     return (
       <>
-        <Dashboard 
-          onCreateNew={handleCreateNew} 
+        <Dashboard
+          onCreateNew={handleCreateNew}
           onCreateWithAI={handleCreateWithAI}
-          onEditAgent={handleEditAgent} 
+          onEditAgent={handleEditAgent}
         />
         <AgentWizard isOpen={wizardOpen} onClose={() => setWizardOpen(false)} onComplete={handleWizardComplete} />
         <GuideBot />
@@ -195,32 +196,48 @@ const App = () => {
               AgentForge
             </span>
           </div>
-          
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#features" className="hover:text-purple-400 transition-colors">Features</a>
-            <a href="#use-cases" className="hover:text-purple-400 transition-colors">Use Cases</a>
-            <button
-              onClick={() => setCurrentPage('templates')}
-              className="hover:text-purple-400 transition-colors flex items-center gap-2"
-            >
-              <BookTemplate className="w-4 h-4" />
-              Templates
-            </button>
-            <button
-              onClick={() => setCurrentPage('dashboard')}
-              className="hover:text-purple-400 transition-colors"
-            >
-              Dashboard
-            </button>
-            <button
-              onClick={navigateToDashboard}
-              className="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all"
-            >
-              Get Started
-            </button>
-          </div>
 
-          <button 
+          {/* ROUTING */}
+
+
+          <BrowserRouter>
+            <div className="hidden md:flex items-center gap-8">
+              <a href="#features" className="hover:text-purple-400 transition-colors">Features</a>
+              <a href="#use-cases" className="hover:text-purple-400 transition-colors">Use Cases</a>
+              <button
+                onClick={() => setCurrentPage('templates')}
+                className="hover:text-purple-400 transition-colors flex items-center gap-2"
+              >
+                <BookTemplate className="w-4 h-4" />
+                Templates
+              </button>
+              <Link to="/template"> Template </Link>
+              {/* <button
+                onClick={() => setCurrentPage('dashboard')}
+                className="hover:text-purple-400 transition-colors"
+              >
+                Dashboard
+              </button> */}
+              <Link to="/profile"> Profile </Link>
+              <button
+                onClick={navigateToDashboard}
+                className="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all"
+              >
+                Get Started
+              </button>
+            </div>
+            <Routes>
+              {/* <Route path="/" element={<App />} /> */}
+              {/* <Route path="/template" element={<Templates/>} /> */}
+              <Route path="/profile" element={<Profile onBack={() => setCurrentPage('home')} />} />
+            </Routes>
+          </BrowserRouter>
+
+
+
+
+
+          <button
             className="md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
@@ -263,7 +280,7 @@ const App = () => {
             <Zap className="w-4 h-4 text-purple-400" />
             <span className="text-sm text-purple-300">Build AI Agents in Minutes, Not Months</span>
           </div>
-          
+
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
             <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-gradient-x">
               Create Intelligent
@@ -271,12 +288,12 @@ const App = () => {
             <br />
             <span className="text-white">AI Agents Without Code</span>
           </h1>
-          
+
           <p className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
-            Empower your workflow with custom AI agents that automate tasks, analyze data, 
+            Empower your workflow with custom AI agents that automate tasks, analyze data,
             and integrate seamlessly with your favorite tools. No programming required.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={handleCreateWithAI}
@@ -325,7 +342,7 @@ const App = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, i) => (
-            <div 
+            <div
               key={i}
               className="group p-8 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all hover:shadow-xl hover:shadow-purple-500/20 hover:-translate-y-1"
             >
@@ -349,7 +366,7 @@ const App = () => {
             <p className="text-xl text-gray-300 mb-8">
               From simple automation to complex workflows, our platform handles it all
             </p>
-            
+
             <div className="space-y-4">
               {useCases.map((useCase, i) => (
                 <div key={i} className="flex items-start gap-4 p-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10">
@@ -374,7 +391,7 @@ const App = () => {
                     <Sparkles className="w-5 h-5 text-purple-400" />
                   </div>
                 </div>
-                
+
                 <div className="flex items-center gap-4 p-4 bg-blue-500/20 rounded-xl">
                   <Database className="w-8 h-8 text-blue-400" />
                   <div className="flex-1">
@@ -385,7 +402,7 @@ const App = () => {
                     <Sparkles className="w-5 h-5 text-blue-400" />
                   </div>
                 </div>
-                
+
                 <div className="flex items-center gap-4 p-4 bg-pink-500/20 rounded-xl">
                   <Video className="w-8 h-8 text-pink-400" />
                   <div className="flex-1">
@@ -439,8 +456,8 @@ const App = () => {
       </footer>
 
       <GuideBot />
-      <Onboarding 
-        isOpen={showOnboarding} 
+      <Onboarding
+        isOpen={showOnboarding}
         onComplete={handleOnboardingComplete}
         onSkip={handleOnboardingSkip}
       />

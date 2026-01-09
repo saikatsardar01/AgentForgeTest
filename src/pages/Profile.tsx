@@ -107,3 +107,5 @@ export const Profile: React.FC<ProfileProps> = ({ onBack }) => {
     </div>
   );
 };
+
+export default Profile;

@@ -38,3 +38,5 @@ export const Templates: React.FC<TemplatesProps> = ({ onBack, onUseTemplate }) =
     </div>
   );
 };
+
+export default Templates;
