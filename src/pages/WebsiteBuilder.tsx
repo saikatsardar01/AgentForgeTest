@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowLeft, Play, Code, Download, Laptop, Loader2, Sparkles, Layout } from 'lucide-react';
 import { ThinkingTerminal, type LogStep } from '../components/agent/ThinkingTerminal';
-import { agentService } from '../services/agentService';
+import { agentService } from '../services/webAgent';
 
 interface WebsiteBuilderProps {
     onBack: () => void;
@@ -24,6 +24,71 @@ export const WebsiteBuilder: React.FC<WebsiteBuilderProps> = ({ onBack }) => {
         }]);
     };
 
+    // const handleGenerate = async () => {
+    //     if (!description) {
+    //         alert('Please enter a website description');
+    //         return;
+    //     }
+
+    //     setLoading(true);
+    //     setLogs([]);
+    //     setGeneratedCode(null);
+
+    //     try {
+    //         addLog("Initializing Website Builder Agent...", 'info');
+    //         await new Promise(r => setTimeout(r, 600));
+
+    //         addLog("Analyzing requirements and style...", 'analysis');
+    //         await new Promise(r => setTimeout(r, 800));
+
+    //         addLog("Drafting layout structure...", 'tool');
+
+    //         const prompt = `
+    //     CRITICAL INSTRUCTION: You are an expert web developer. 
+    //     Create a COMPLETE, SINGLE-FILE HTML website based on this description: "${description}"
+    //     Style: ${style}
+
+    //     Requirements:
+    //     1. VALID HTML5 structure with <!DOCTYPE html>
+    //     2. Embedded CSS in <style> tags (Use CSS Variables, Flexbox, Grid)
+    //     3. Embedded JS in <script> tags (if interactive elements are needed)
+    //     4. Modern, responsive, and aesthetically pleasing design.
+    //     5. NO external file references (images can be placeholders or unsplash source URLs).
+
+    //     Return ONLY the raw HTML code block. Do not include markdown formatting like \`\`\`html at the start or end if possible, or I will strip it.
+    //   `;
+
+    //         // Call the AI
+    //         const response = await agentService.executeAdHoc(prompt);
+
+    //         addLog("Generative AI synthesis complete.", 'success');
+    //         await new Promise(r => setTimeout(r, 500));
+
+    //         let output = response.data.output;
+
+    //         if (typeof output !== 'string') {
+    //             output = JSON.stringify(output);
+    //         }
+
+    //         // Cleanup markdown if present
+    //         const codeMatch = output.match(/```html([\s\S]*?)```/) || output.match(/```([\s\S]*?)```/);
+    //         if (codeMatch && codeMatch[1]) {
+    //             output = codeMatch[1].trim();
+    //         } else {
+    //             output = output.replace(/```html/g, '').replace(/```/g, '').trim();
+    //         }
+
+    //         setGeneratedCode(output);
+    //         addLog("Website ready for preview!", 'success');
+
+    //     } catch (error: any) {
+    //         console.error(error);
+    //         addLog(`Generation failed: ${error.message}`, 'error');
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
+
     const handleGenerate = async () => {
         if (!description) {
             alert('Please enter a website description');
@@ -35,55 +100,62 @@ export const WebsiteBuilder: React.FC<WebsiteBuilderProps> = ({ onBack }) => {
         setGeneratedCode(null);
 
         try {
-            addLog("Initializing Website Builder Agent...", 'info');
-            await new Promise(r => setTimeout(r, 600));
+            addLog("🚀 Initializing Website Builder Agent...", 'info');
+            await new Promise(r => setTimeout(r, 400));
 
-            addLog("Analyzing requirements and style...", 'analysis');
-            await new Promise(r => setTimeout(r, 800));
+            addLog("🧠 Analyzing requirements and style...", 'analysis');
 
-            addLog("Drafting layout structure...", 'tool');
-
+            // STRENGTHENED PROMPT
             const prompt = `
-        CRITICAL INSTRUCTION: You are an expert web developer. 
-        Create a COMPLETE, SINGLE-FILE HTML website based on this description: "${description}"
-        Style: ${style}
-        
-        Requirements:
-        1. VALID HTML5 structure with <!DOCTYPE html>
-        2. Embedded CSS in <style> tags (Use CSS Variables, Flexbox, Grid)
-        3. Embedded JS in <script> tags (if interactive elements are needed)
-        4. Modern, responsive, and aesthetically pleasing design.
-        5. NO external file references (images can be placeholders or unsplash source URLs).
-        
-        Return ONLY the raw HTML code block. Do not include markdown formatting like \`\`\`html at the start or end if possible, or I will strip it.
-      `;
+            Task: Create a professional, single-file HTML website.
+            Description: "${description}"
+            Style: ${style}
+            
+            Technical Specs:
+            - Use Tailwind CSS via CDN for modern styling: <script src="https://cdn.tailwindcss.com"></script>
+            - Use Lucide or FontAwesome for icons.
+            - Include a responsive <nav>, <main> content, and <footer>.
+            - Ensure dark/light mode compatibility based on the style.
+            
+            Constraints:
+            - Return ONLY the HTML code. 
+            - NO introductory text. 
+            - NO markdown code blocks (\`\`\`html) - just start with <!DOCTYPE html>.
+        `;
 
-            // Call the AI
+            addLog("🛠️ Drafting layout and injecting Tailwind logic...", 'tool');
             const response = await agentService.executeAdHoc(prompt);
 
-            addLog("Generative AI synthesis complete.", 'success');
-            await new Promise(r => setTimeout(r, 500));
+            let output = response?.data?.output || '';
 
-            let output = response.data.output;
+            // BETTER CLEANUP: Find the first <!DOCTYPE or <html and the last </html>
+            // This ignores any conversational "chatter" the AI might add.
+            const htmlStart = output.indexOf('<!DOCTYPE') !== -1 ? output.indexOf('<!DOCTYPE') : output.indexOf('<html');
+            const htmlEnd = output.lastIndexOf('</html>');
 
-            if (typeof output !== 'string') {
-                output = JSON.stringify(output);
-            }
-
-            // Cleanup markdown if present
-            const codeMatch = output.match(/```html([\s\S]*?)```/) || output.match(/```([\s\S]*?)```/);
-            if (codeMatch && codeMatch[1]) {
-                output = codeMatch[1].trim();
+            if (htmlStart !== -1 && htmlEnd !== -1) {
+                output = output.substring(htmlStart, htmlEnd + 7);
             } else {
+                // Fallback to your existing markdown stripper if tags aren't found
                 output = output.replace(/```html/g, '').replace(/```/g, '').trim();
             }
 
             setGeneratedCode(output);
-            addLog("Website ready for preview!", 'success');
+            addLog("✅ Website synthesis complete!", 'success');
 
         } catch (error: any) {
-            console.error(error);
-            addLog(`Generation failed: ${error.message}`, 'error');
+            console.error("Generation Error:", error);
+
+            // SPECIFIC QUOTA ERROR HANDLING
+            if (error.message?.includes('429')) {
+                const retryMatch = error.message.match(/retry in ([\d.]+)s/);
+                const waitTime = retryMatch ? Math.ceil(parseFloat(retryMatch[1])) : 60;
+                addLog(`⚠️ Quota Exceeded: Please wait ${waitTime} seconds before trying again.`, 'error');
+            } else if (error.message?.includes('404')) {
+                addLog("❌ Model not found. Attempting to switch model version...", 'error');
+            } else {
+                addLog(`❌ Generation failed: ${error.message}`, 'error');
+            }
         } finally {
             setLoading(false);
         }
@@ -172,8 +244,8 @@ export const WebsiteBuilder: React.FC<WebsiteBuilderProps> = ({ onBack }) => {
                                         key={s}
                                         onClick={() => setStyle(s.toLowerCase())}
                                         className={`p-3 rounded-lg border text-sm font-medium transition-all ${style === s.toLowerCase()
-                                                ? 'bg-indigo-500/20 border-indigo-500 text-indigo-300'
-                                                : 'bg-slate-950 border-white/10 text-slate-400 hover:border-white/20'
+                                            ? 'bg-indigo-500/20 border-indigo-500 text-indigo-300'
+                                            : 'bg-slate-950 border-white/10 text-slate-400 hover:border-white/20'
                                             }`}
                                     >
                                         {s}
