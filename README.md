@@ -12,7 +12,7 @@
 
 ---
 
-### "12 commits, 2.3 million lines—I didn’t just install the package, I became the entire `node_modules` folder." 🚀
+### "12 commits, 2.3 million lines - I didn’t just install the package, I became the entire `node_modules` folder." 🚀
 </div>
 
 ## 📖 Overview
