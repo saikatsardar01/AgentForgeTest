@@ -57,7 +57,10 @@ VITE_FIREBASE_APP_ID="secret:d8e1fcddc7f6b7f3a53f49"
 👥 Meet the Architects: 4-Bit Coders
 A specialized team merging hardware-level efficiency with modern AI.
 
-<div align="center"> <table> <tr> <td align="center"> <a href="https://www.google.com/search?q=https://github.com/saikatsardar01"> <img src="https://www.google.com/search?q=https://github.com/saikatsardar01.png" width="100px;" alt="Saikat Sardar"/><br /> <sub><b>Saikat Sardar</b></sub> </a><br /> 👑 Lead Developer </td> <td align="center"> <img src="https://www.google.com/search?q=https://via.placeholder.com/100%3Ftext%3DUSER" width="100px;" alt="Member 2"/><br /> <sub><b>Member Name</b></sub><br /> 🚀 UI/UX Lead </td> <td align="center"> <img src="https://www.google.com/search?q=https://via.placeholder.com/100%3Ftext%3DUSER" width="100px;" alt="Member 3"/><br /> <sub><b>Member Name</b></sub><br /> 🧠 AI Specialist </td> <td align="center"> <img src="https://www.google.com/search?q=https://via.placeholder.com/100%3Ftext%3DUSER" width="100px;" alt="Member 4"/><br /> <sub><b>Member Name</b></sub><br /> ⚙️ DevOps </td> </tr> </table> </div>
+<div align="center"> <table> 
+<tr> <td align="center"> <a href="https://github.com/saikatsardar01"> <img src="https://avatars.githubusercontent.com/u/153124279?v=4" width="100px;" alt="Saikat Sardar"/><br /> <sub><b>Saikat Sardar</b></sub> </a><br /> 👑 Lead Developer </td> 
+<td align="center"> <a href="https://github.com/RaunakDas10"> <img src="https://avatars.githubusercontent.com/u/186401854?v=4" width="100px;" alt="Member 2"/><br /> <sub><b>Raunak Das</b></sub><br /> 🚀 Leader </td> <td align="center"> <a href="https://github.com/utsa06"> <img src="https://avatars.githubusercontent.com/u/180530995?v=4" width="100px;" alt="Member 3"/><br /> <sub><b>Utsa Paul</b></sub><br /> 🧠 Auth Specialist </td> <td align="center"> <a href="https://github.com/tiyashabaul"> <img src="https://storage.googleapis.com/vision-hack2skill-production/innovator/USER01225211/1766154122876-DisplayPicture.webp" width="100px;" alt="Member 4"/><br /> <sub><b>Tiyasha Baul</b></sub><br /> ⚙️ Designer </td> </tr> 
+</table> </div>
 
 🛠️ Installation
 ```bash
