@@ -1,11 +1,11 @@
 <div align="center">
 
-![Winter Solstice Banner](https://via.placeholder.com/1200x400?text=WINTER+SOLSTICE+2026+HACKATHON+BANNER)
+![Winter Solstice Banner](https://storage.googleapis.com/vision-hack2skill-production/innovator/USER00275243/1765634281446-WINTERSOLSTICBANNER.webp)
 
 # 🛠️ AgentForge
 **Mastering the Art of Autonomous AI Workflows**
 
-[![GitHub Stars](https://img.shields.io/github/stars/saikatsardar01/AgentForge?style=for-the-badge&color=blue)](https://github.com/saikatsardar01/AgentForge)
+[![GitHub Stars](https://img.shields.io/github/stars/RaunakDas10/AgentForge?style=for-the-badge&color=blue)](https://github.com/RaunakDas10/AgentForge)
 [![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white)](https://firebase.google.com/)
 [![Gemini](https://img.shields.io/badge/Google_Gemini-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white)](https://deepmind.google/technologies/gemini/)
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
@@ -54,7 +54,7 @@ VITE_FIREBASE_MESSAGING_SENDER_ID="integer"
 VITE_FIREBASE_APP_ID="secret:d8e1fcddc7f6b7f3a53f49"
 ```
 
-👥 Meet the Architects: 4-Bit Coders
+## 👥 Meet the Architects: 4-Bit Coders
 A specialized team merging hardware-level efficiency with modern AI.
 
 <div align="center"> <table> 
@@ -63,7 +63,7 @@ A specialized team merging hardware-level efficiency with modern AI.
 <td align="center"> <a href="https://github.com/tiyashabaul"> <img src="https://storage.googleapis.com/vision-hack2skill-production/innovator/USER01225211/1766154122876-DisplayPicture.webp" width="100px;" alt="Member 4"/><br /> <sub><b>Tiyasha Baul</b></a></sub><br /> ⚙️ Designer </td> </tr> 
 </table> </div>
 
-🛠️ Installation
+### 🛠️ Installation
 ```bash
 # Clone the repository
 git clone [https://github.com/saikatsardar01/AgentForge.git](https://github.com/saikatsardar01/AgentForge.git)
